@@ -305,6 +305,12 @@ func setNamespaces(daemon *Daemon, s *specs.Spec, c *container.Container) error 
 		s.Hostname = ""
 	}
 
+	// cgroup
+	if daemon.cgroupNamespacesEnabled && !c.HostConfig.Privileged {
+		nsCgroup := specs.LinuxNamespace{Type: "cgroup"}
+		setNamespace(s, nsCgroup)
+	}
+
 	return nil
 }
 
