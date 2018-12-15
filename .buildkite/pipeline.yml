@@ -1,0 +1,15 @@
+steps:
+  - label: Build docker-ce debian package
+    command: make ubuntu-xenial
+    artifact_paths: "components/packaging/deb/debbuild/ubuntu-xenial/*"
+  - wait
+  - trigger: titus-upload-debs
+    async: false
+    branches: "master"
+    build:
+      env:
+        CALLER_BUILD_ID: "${BUILDKITE_BUILD_ID}"
+        CALLER_JOB_ID: "${BUILDKITE_JOB_ID}"
+        CALLER_UPLOAD_DEB: "components/packaging/deb/debbuild/ubuntu-xenial/docker-ce_18.06.1~ce~nflx~3-0~ubuntu_amd64.deb"
+        CALLER_PACKAGE_NAME: "docker-ce"
+        BUILDKITE_CLEAN_CHECKOUT: "true"
