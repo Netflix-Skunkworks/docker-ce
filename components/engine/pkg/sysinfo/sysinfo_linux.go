@@ -62,6 +62,11 @@ func New(quiet bool) *SysInfo {
 		}
 	}
 
+	// Check if cgroup namespaces are supported.
+	if _, err := os.Stat("/proc/self/ns/cgroup"); !os.IsNotExist(err) {
+		sysInfo.CgroupNamespaces = true
+	}
+
 	return sysInfo
 }
 
