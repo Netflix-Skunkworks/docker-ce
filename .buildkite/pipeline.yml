@@ -10,6 +10,6 @@ steps:
       env:
         CALLER_BUILD_ID: "${BUILDKITE_BUILD_ID}"
         CALLER_JOB_ID: "${BUILDKITE_JOB_ID}"
-        CALLER_UPLOAD_DEB: "components/packaging/deb/debbuild/ubuntu-xenial/docker-ce_18.09.1~2.1~nflx.rc1~nflx-0~ubuntu-xenial_amd64.deb"
+        CALLER_UPLOAD_DEB: "components/packaging/deb/debbuild/ubuntu-xenial/docker*.deb"
         CALLER_PACKAGE_NAME: "docker-ce"
         BUILDKITE_CLEAN_CHECKOUT: "true"
