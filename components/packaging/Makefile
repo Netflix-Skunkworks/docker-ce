@@ -53,6 +53,10 @@ deb: ## build deb packages
 ubuntu-xenial:
 	$(MAKE) -C deb VERSION=$(VERSION) ENGINE_DIR=$(ENGINE_DIR) CLI_DIR=$(CLI_DIR) GO_VERSION=$(GO_VERSION) ubuntu-xenial
 
+.PHONY: ubuntu-bionic
+ubuntu-bionic:
+	$(MAKE) -C deb VERSION=$(VERSION) ENGINE_DIR=$(ENGINE_DIR) CLI_DIR=$(CLI_DIR) GO_VERSION=$(GO_VERSION) ubuntu-bionic
+
 .PHONY: static
 static: DOCKER_BUILD_PKGS:=static-linux cross-mac cross-win cross-arm
 static: ## build static-compiled packages

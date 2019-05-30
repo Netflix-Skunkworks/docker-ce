@@ -25,6 +25,10 @@ deb: ## build deb packages
 ubuntu-xenial: ## build deb packages
 	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) ubuntu-xenial
 
+.PHONY: ubuntu-bionic
+ubuntu-bionic: ## build deb packages
+	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) ubuntu-bionic
+
 .PHONY: rpm
 rpm: ## build rpm packages
 	$(MAKE) VERSION=$(VERSION) CLI_DIR=$(CLI_DIR) ENGINE_DIR=$(ENGINE_DIR) -C $(PACKAGING_DIR) rpm

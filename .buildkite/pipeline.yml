@@ -1,5 +1,5 @@
 steps:
-  - label: Build docker-ce debian package
+  - label: Build docker-ce xenial package
     command: make ubuntu-xenial
     artifact_paths: "components/packaging/deb/debbuild/ubuntu-xenial/*"
   - wait
@@ -12,4 +12,20 @@ steps:
         CALLER_JOB_ID: "${BUILDKITE_JOB_ID}"
         CALLER_UPLOAD_DEB: "components/packaging/deb/debbuild/ubuntu-xenial/docker*.deb"
         CALLER_PACKAGE_NAME: "docker-ce"
+        CALLER_DIST: "xenial"
         BUILDKITE_CLEAN_CHECKOUT: "true"
+  - wait
+  - label: Build docker-ce bionic package
+    command: make ubuntu-bionic
+    artifact_paths: "components/packaging/deb/debbuild/ubuntu-bionic/*"
+  - wait
+  - trigger: titus-upload-debs
+    async: false
+    branches: "master v*"
+    build:
+      env:
+        CALLER_BUILD_ID: "${BUILDKITE_BUILD_ID}"
+        CALLER_JOB_ID: "${BUILDKITE_JOB_ID}"
+        CALLER_UPLOAD_DEB: "components/packaging/deb/debbuild/ubuntu-bionic/docker*.deb"
+        CALLER_PACKAGE_NAME: "docker-ce"
+        CALLER_DIST: "bionic"
